@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row signInform-div justify-content-center align-items-center" >
+        <div class="col-10">
+          <div class="row boxShadow">
+            <div class="col-6 p-4 justify-content-center align-items-center">
+              <div class="h2tag">
+                <h2>Please Sign Up</h2>
+              </div>
+              <form method="post" action="/admin/signup">
+                <div class="mb-3 p-2">
+                    <label for="exampleInputEmail1" class="form-label labeldesign">Name</label>
+                    <input type="text" class="form-control inputdesign mt-2" id="name" name="name" placeholder="Please Enter Your Name">
+                  </div>
+                <div class="mb-3 mt-3 p-2">
+                  <label for="exampleInputEmail1" class="form-label labeldesign">Email address</label>
+                  <input type="email" class="form-control inputdesign mt-2" id="email" name="email" placeholder="Please Enter Your Email">
+                </div>
+                <div class="mb-3 mt-3 p-2">
+                  <label for="exampleInputPassword1" class="form-label labeldesign">Password</label>
+                  <input type="password" class="form-control inputdesign mt-2" name="password" id="password" placeholder="Please Enter Password">
+                </div>
+                <div class="btn mt-2">
+                  <button type="submit" class="btn btn-primary submitBtn">Submit</button>
+                </div>
+                <% if (typeof status !== 'undefined' && status == 201) { %>
+                  <div class="status-message">
+                    <p class="successMsg"><%= message %> <img src="/images/success.png" alt="" height="50px" width="50px"></p>
+                  </div>
+                <% } else if (typeof status !== 'undefined' && status == 400) { %>
+                  <div class="status-message">
+                    <p class="errorMsg"><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
+                  </div>
+                <% } %>
+                <div class="signIn">
+                    <span>Already have an Account</span>
+                    <a class="goToLink" href="/admin/signin">Sign In Here</a>
+                </div>
+              </form>
+            </div>
+            <div class="col-6 imagedesign g-0 p-0">
+              <img class="imagepos img-fluid" src="/images/signup.jpg" alt="Your Image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

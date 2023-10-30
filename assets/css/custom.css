@@ -1,0 +1,52 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+.boxShadow{
+    box-shadow: 17px -10px 12px 0px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+    border-radius: 20px;
+}
+.signInform-div{
+    height: 100vh;
+}
+.submitBtn{
+    background-color: #ff6d01;
+    border-color: #ff6d01;
+}
+.h2tag{
+    color: #ff6d01;
+    text-align: center;
+}
+.labeldesign{
+    color: #ff6d01;
+    font-weight: 700;
+    font-size: large;
+}
+.inputdesign{
+    padding: 10px;
+}
+.imagedesign{
+    overflow: hidden;
+}
+.imagepos{
+    object-fit: cover;
+    border-radius: 0 20px 20px 0;
+}
+.goToLink{
+    text-decoration: none;
+}
+.successMsg {
+    color: white;
+    background: linear-gradient(45deg, #30bf31, #163d06);
+    padding: 1px;   
+    font-weight: 700;
+    text-align: center;
+}
+.errorMsg{
+    color: white;
+    background: linear-gradient(45deg, #e63418, #7d0903);
+    padding: 1px;   
+    font-weight: 700;
+    text-align: center;   
+}
