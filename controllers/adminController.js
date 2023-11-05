@@ -17,17 +17,34 @@ router.post('/signup', async (req, resp) => {
     const data = {
         status: 400, // Default to an error status
         message: '' // Initialize the message
-    };    
+    };
+    console.log("ddd"+name)    
+    console.log(email)    
+    console.log(password)    
     try {
-        const newUser = await userModel.createUser(name, email, password);
-         data.status  = 201
-        data.message='User Created'
-        
+        if(name!=="" && email !=="" && password!==""){
+            const newUser = await userModel.createUser(name, email, password);
+            const data = {
+                status: 400, // Default to an error status
+                message: 'User Created' // Initialize the message
+            };
+           resp.render('admin/signUp',data);
+        }
+      else{
+        const data = {
+            status:400,
+            message:"All fields are required"
+        }
+        resp.render('admin/signUp',data);
+      }    
     }
     catch (error) {
-        data.message= error.message
+        const data = {
+            status: 500, 
+            message: error.message // Initialize the message
+        };    
+        resp.render('admin/signUp',data);
     }
-    resp.render('admin/signUp',data);
 
 })
 
