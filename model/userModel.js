@@ -1,3 +1,4 @@
+const { Error } = require('sequelize');
 const dbConn = require('../db/dbConnection');
 const bcrypt = require('bcrypt');
 
@@ -19,7 +20,7 @@ function checkEmailExist(email) {
 
 async function createUser(name, email, password) {
     const emailExists  = await checkEmailExist(email);
-    if (emailExists ) {
+    if (emailExists) {
         throw new Error('Email is already Exist');
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,5 +36,33 @@ async function createUser(name, email, password) {
         })
     })
 }
+async function signInUser(email, password){
+    const emailExists =  await checkEmailExist(email)
+    if(emailExists){
+        return new Promise((resolve,reject)=>{
+            const query = `SELECT password from users WHERE email=?`;
+            const value = [email];
+            dbConn.query(query,value,async (err,result)=>{
+                if(err){
+                    reject(err)
+                }else{
+                    if(result){
+                        const dbpassword = result[0].password;
+                        const passwordMatch = await bcrypt.compare(password, dbpassword);
+                        if(passwordMatch){
+                            resolve(result);
+                        }
+                        else{
+                            throw new Error(`Password is Incorrect`);
+                        }
+                    }
+                }
+            });
+        })
+    }
+    else{
+        throw new Error('This Email is not Exist');
+    }
 
-module.exports ={createUser};
+}
+module.exports ={createUser, signInUser};
