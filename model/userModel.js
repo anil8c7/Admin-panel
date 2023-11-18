@@ -19,7 +19,7 @@ function checkEmailExist(email) {
 }
 
 async function createUser(name, email, password) {
-    const emailExists  = await checkEmailExist(email);
+    const emailExists = await checkEmailExist(email);
     if (emailExists) {
         throw new Error('Email is already Exist');
     }
@@ -27,32 +27,32 @@ async function createUser(name, email, password) {
     return new Promise((resolve, reject) => {
         const query = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
         const values = [name, email, hashedPassword]
-        dbConn.query(query,values,(error,result)=>{
-            if(error){
+        dbConn.query(query, values, (error, result) => {
+            if (error) {
                 reject(error);
-            }else{
+            } else {
                 resolve(result);
             }
         })
     })
 }
-async function signInUser(email, password){
-    const emailExists =  await checkEmailExist(email)
-    if(emailExists){
-        return new Promise((resolve,reject)=>{
+async function signInUser(email, password) {
+    const emailExists = await checkEmailExist(email)
+    if (emailExists) {
+        return new Promise((resolve, reject) => {
             const query = `SELECT password from users WHERE email=?`;
             const value = [email];
-            dbConn.query(query,value,async (err,result)=>{
-                if(err){
+            dbConn.query(query, value, async (err, result) => {
+                if (err) {
                     reject(err)
-                }else{
-                    if(result){
+                } else {
+                    if (result) {
                         const dbpassword = result[0].password;
                         const passwordMatch = await bcrypt.compare(password, dbpassword);
-                        if(passwordMatch){
+                        if (passwordMatch) {
                             resolve(result);
                         }
-                        else{
+                        else {
                             throw new Error(`Password is Incorrect`);
                         }
                     }
@@ -60,9 +60,9 @@ async function signInUser(email, password){
             });
         })
     }
-    else{
+    else {
         throw new Error('This Email is not Exist');
     }
 
 }
-module.exports ={createUser, signInUser};
+module.exports = { createUser, signInUser };

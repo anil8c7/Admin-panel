@@ -15,7 +15,7 @@ router.post('/signup', async (req, resp) => {
     };
     try {
         if (name !== "" && email !== "" && password !== "") {
-          let isEmailValid = await checkEmailValidation(email)
+            let isEmailValid = await checkEmailValidation(email)
             if (isEmailValid) {
                 const newUser = await userModel.createUser(name, email, password);
                 const data = {
@@ -61,10 +61,10 @@ router.get('/signin', async (req, resp) => {
 })
 
 router.post('/signin', async (req, resp) => {
-    const {email,password} =  req.body;
+    const { email, password } = req.body;
     try {
-        if(email != "" && password != ""){
-            const user  = await userModel.signInUser(email,password);
+        if (email != "" && password != "") {
+            const user = await userModel.signInUser(email, password);
         }
     } catch (error) {
         console.log(error.message);
@@ -72,7 +72,7 @@ router.post('/signin', async (req, resp) => {
             status: 500,
             message: error.message
         };
-        resp.render('admin/signIn', data);   
+        resp.render('admin/signIn', data);
     }
 })
 
