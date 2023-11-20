@@ -29,6 +29,11 @@
                   <label for="exampleInputPassword1" class="form-label labeldesign">Password</label>
                   <input type="password" class="form-control inputdesign mt-2" name="password" id="password" placeholder="Please Enter Password">
                 </div>
+                <% if(typeof status !== 'undefined' && (status==400 || status==500)){ %>
+                  <div class="status-message">
+                    <p class="errorMsg"><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
+                  </div>
+                <% } %>
                 <div class="btn mt-4">
                   <button type="submit" class="btn btn-primary submitBtn">Submit</button>
                 </div>
