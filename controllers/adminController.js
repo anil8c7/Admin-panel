@@ -61,7 +61,7 @@ router.get('/signin', async (req, resp) => {
 })
 
 router.post('/signin', async (req, resp) => {
-    const { email, password } = req.body;
+    const {email,password} =  req.body;
     try {
         if (email != "" && password != "") {
             const user = await userModel.signInUser(email, password);
