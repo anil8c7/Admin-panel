@@ -25,7 +25,7 @@
               test();
             </script>
         <p class="errorMsg"><span class="crossIcon"><i class="fa-solid fa-xmark"></i></span><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
-        <% }else{ %>
+        <% }else if(typeof status !== 'undefined' && status===201){ %>
           <p class="errorMsg successMsg"><span class="crossIcon"><i class="fa-solid fa-xmark"></i></span><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
           <% } %>
 
