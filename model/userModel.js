@@ -36,7 +36,7 @@ async function createUser(name, email, password) {
         })
     })
 }
-export async function signInUser(email, password) {
+ async function signInUser(email, password) {
         const emailExists = await checkEmailExist(email);
         if (emailExists) {
             return new Promise((resolve, reject) => {

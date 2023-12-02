@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router();
-import  userModel from '../model/userModel';
 
 router.get('/signup', async (req, resp) => {
 
