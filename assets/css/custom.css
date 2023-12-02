@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
   }
+  body{
+    height: 100vh;
+  }
 .boxShadow{
     box-shadow: 17px -10px 12px 0px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
     border-radius: 20px;
@@ -38,15 +41,35 @@
 }
 .successMsg {
     color: white;
-    background: linear-gradient(45deg, #30bf31, #163d06);
+    background: rgb(21, 168, 21);
     padding: 1px;   
     font-weight: 700;
     text-align: center;
 }
 .errorMsg{
     color: white;
-    background: linear-gradient(45deg, #e63418, #7d0903);
-    padding: 1px;   
+    background: #ffa4a4;
+    padding: 0px 10px;   
     font-weight: 700;
     text-align: center;   
 }
+.messages{
+    position: relative;
+}
+.status-message{
+    position: absolute;
+    top: 23px;
+    right: 86px;
+    transition: transform 0.1s,right 0.1s;  
+    visibility: hidden;
+}
+.visible {
+    visibility: visible;
+    right: -10px;
+    transition: 0.9s ease-in-out;
+}
+.crossIcon{
+    margin-right: 40px;
+    padding: 0px 10px;
+}
+ 

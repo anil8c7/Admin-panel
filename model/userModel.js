@@ -36,33 +36,33 @@ async function createUser(name, email, password) {
         })
     })
 }
-async function signInUser(email, password) {
-    const emailExists = await checkEmailExist(email)
-    if (emailExists) {
-        return new Promise((resolve, reject) => {
-            const query = `SELECT password from users WHERE email=?`;
-            const value = [email];
-            dbConn.query(query, value, async (err, result) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    if (result) {
-                        const dbpassword = result[0].password;
-                        const passwordMatch = await bcrypt.compare(password, dbpassword);
-                        if (passwordMatch) {
-                            resolve(result);
-                        }
-                        else {
-                            throw new Error(`Password is Incorrect`);
+export async function signInUser(email, password) {
+        const emailExists = await checkEmailExist(email);
+        if (emailExists) {
+            return new Promise((resolve, reject) => {
+                const query = 'SELECT password FROM users WHERE email=?';
+                const value = [email];
+                dbConn.query(query, value, async (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        if (result.length > 0) {
+                            const dbpassword = result[0].password;
+                            const passwordMatch = await bcrypt.compare(password, dbpassword);
+                            if (passwordMatch) {
+                                resolve(result);
+                            } else {
+                                reject('Password is Incorrect');
+                            }
+                        } else {
+                            reject('User Not found');
                         }
                     }
-                }
+                });
             });
-        })
-    }
-    else {
-        throw new Error('This Email is not Exist');
-    }
-
+        } else {
+            throw new Error('This Email is not Exist');
+        }
 }
+
 module.exports = { createUser, signInUser };

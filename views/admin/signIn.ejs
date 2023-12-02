@@ -7,11 +7,27 @@
   <title>SignIn page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/css/custom.css">
 </head>
-
 <body>
   <div class="container-fluid">
+      <div class="messages">
+        <div class="status-message" id="successDiv">
+          <% if(typeof status !== 'undefined' && (status==400 || status==500)){ %>
+            <script>
+              function test(){
+                setTimeout(() => {
+                  let messageDiv=document.getElementById('successDiv');
+                  messageDiv.classList.add("visible");
+                }, 1000);
+              }
+              test();
+            </script>
+        <p class="errorMsg"><span class="crossIcon"><i class="fa-solid fa-xmark"></i></span><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
+        <% } %>
+      </div>
+    </div>
     <div class="container">
       <div class="row signInform-div justify-content-center align-items-center" >
         <div class="col-10">
@@ -29,11 +45,6 @@
                   <label for="exampleInputPassword1" class="form-label labeldesign">Password</label>
                   <input type="password" class="form-control inputdesign mt-2" name="password" id="password" placeholder="Please Enter Password">
                 </div>
-                <% if(typeof status !== 'undefined' && (status==400 || status==500)){ %>
-                  <div class="status-message">
-                    <p class="errorMsg"><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
-                  </div>
-                <% } %>
                 <div class="btn mt-4">
                   <button type="submit" class="btn btn-primary submitBtn">Submit</button>
                 </div>
@@ -54,6 +65,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+    <script src="/js/style.js"></script>
 </body>
 
 </html>

@@ -9,9 +9,17 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/custom.css">
 </head>
-
 <body>
   <div class="container-fluid">
+    <% if (typeof status !== 'undefined' && status == 201) { %>
+      <div class="status-message">
+        <p class="successMsg"><%= message %> <img src="/images/success.png" alt="" height="50px" width="50px"></p>
+      </div>
+    <% } else if (typeof status !== 'undefined' && status == 400) { %>
+      <div class="status-message">
+        <p class="errorMsg"><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
+      </div>
+    <% } %>
     <div class="container">
       <div class="row signInform-div justify-content-center align-items-center" >
         <div class="col-10">
@@ -36,15 +44,6 @@
                 <div class="btn mt-2">
                   <button type="submit" class="btn btn-primary submitBtn">Submit</button>
                 </div>
-                <% if (typeof status !== 'undefined' && status == 201) { %>
-                  <div class="status-message">
-                    <p class="successMsg"><%= message %> <img src="/images/success.png" alt="" height="50px" width="50px"></p>
-                  </div>
-                <% } else if (typeof status !== 'undefined' && status == 400) { %>
-                  <div class="status-message">
-                    <p class="errorMsg"><%= message %> <img src="/images/error.png" alt="" height="50px" width="50px"></p>
-                  </div>
-                <% } %>
                 <div class="signIn">
                     <span>Already have an Account</span>
                     <a class="goToLink" href="/admin/signin">Sign In Here</a>

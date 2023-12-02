@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const userModel = require('../model/userModel')
+import  userModel from '../model/userModel';
 
 router.get('/signup', async (req, resp) => {
 
@@ -8,7 +8,7 @@ router.get('/signup', async (req, resp) => {
 })
 
 router.post('/signup', async (req, resp) => {
-    const { name, email, password } = req.body;
+     const { name, email, password } = req.body;
     const data = {
         status: 400, // Default to an error status
         message: '' // Initialize the message
@@ -62,18 +62,19 @@ router.get('/signin', async (req, resp) => {
 
 router.post('/signin', async (req, resp) => {
     const {email,password} =  req.body;
+    
     try {
         if (email != "" && password != "") {
             const user = await userModel.signInUser(email, password);
         }
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
         const data = {
             status: 500,
-            message: error.message
+            message:error
         };
         resp.render('admin/signIn', data);
     }
 })
 
-module.exports = router;
+module.exports = router; 
