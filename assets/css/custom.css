@@ -1,75 +1,90 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  body{
+}
+
+body {
     height: 100vh;
-  }
-.boxShadow{
-    box-shadow: 17px -10px 12px 0px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.boxShadow {
+    box-shadow: 17px -10px 12px 0px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
 }
-.signInform-div{
+
+.signInform-div {
     height: 100vh;
 }
-.submitBtn{
+
+.submitBtn {
     background-color: #ff6d01;
     border-color: #ff6d01;
 }
-.h2tag{
+
+.h2tag {
     color: #ff6d01;
     text-align: center;
 }
-.labeldesign{
+
+.labeldesign {
     color: #ff6d01;
     font-weight: 700;
     font-size: large;
 }
-.inputdesign{
+
+.inputdesign {
     padding: 10px;
 }
-.imagedesign{
+
+.imagedesign {
     overflow: hidden;
 }
-.imagepos{
+
+.imagepos {
     object-fit: cover;
     border-radius: 0 20px 20px 0;
 }
-.goToLink{
+
+.goToLink {
     text-decoration: none;
 }
+
 .successMsg {
     color: white;
     background: rgb(21, 168, 21);
-    padding: 1px;   
+    padding: 1px;
     font-weight: 700;
     text-align: center;
 }
-.errorMsg{
+
+.errorMsg {
     color: white;
     background: #ffa4a4;
-    padding: 0px 10px;   
     font-weight: 700;
-    text-align: center;   
+    text-align: center;
 }
-.messages{
+
+.messages {
     position: relative;
 }
-.status-message{
-    position: absolute;
-    top: 23px;
-    right: 86px;
-    transition: transform 0.1s,right 0.1s;  
-    visibility: hidden;
+
+.status-message {
+    position: fixed;
+    top: 2px;
+    right: -500px;
+    transition: right 0.3s ease;
 }
+
 .visible {
     visibility: visible;
-    right: -10px;
-    transition: 0.9s ease-in-out;
+    right: 0px;
+    transition: 1s ease-in-out;
 }
-.crossIcon{
+
+.crossIcon {
     margin-right: 40px;
     padding: 0px 10px;
 }
- 

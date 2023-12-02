@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router();
-
+const userModel = require('../model/userModel');
+const bcrypt = require('bcrypt');
 router.get('/signup', async (req, resp) => {
 
     resp.render('admin/signUp');
 })
 
 router.post('/signup', async (req, resp) => {
-     const { name, email, password } = req.body;
+    const { name, email, password } = req.body;
     const data = {
         status: 400, // Default to an error status
         message: '' // Initialize the message
@@ -60,17 +61,37 @@ router.get('/signin', async (req, resp) => {
 })
 
 router.post('/signin', async (req, resp) => {
-    const {email,password} =  req.body;
-    
+    const { email, password } = req.body;
+
     try {
         if (email != "" && password != "") {
-            const user = await userModel.signInUser(email, password);
+            const emailExist = await userModel.checkEmailExist(email);
+            if (emailExist) {
+                const user = await userModel.signInUser(email);
+                if (user.length > 0) {
+                    const dbpassword = user[0].password;
+                    const passwordMatch = await bcrypt.compare(password, dbpassword);
+                    if (passwordMatch) {
+                        const data = {
+                            status: 201,
+                            message: "User Login Successfully"
+                        };
+                        resp.render('admin/signIn', data);
+                    } else {
+                        throw new Error("Password is not matched");
+                    }
+
+                } else {
+                    throw new Error('User not Exist in DB');
+                }
+            } else {
+                throw new Error('Email is not Exist');
+            }
         }
     } catch (error) {
-        console.log(error);
         const data = {
             status: 500,
-            message:error
+            message: error.message
         };
         resp.render('admin/signIn', data);
     }
