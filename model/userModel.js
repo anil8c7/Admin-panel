@@ -16,7 +16,7 @@ function checkEmailExist(email) {
         })
     })
 }
-
+// create user function
 async function createUser(name, email, password) {
     const emailExists = await checkEmailExist(email);
     if (emailExists) {
