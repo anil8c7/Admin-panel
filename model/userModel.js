@@ -1,5 +1,7 @@
 const { Error } = require('sequelize');
 const dbConn = require('../db/dbConnection');
+const bcrypt = require('bcrypt');
+
 
 
 function checkEmailExist(email) {
@@ -18,10 +20,6 @@ function checkEmailExist(email) {
 }
 // create user function
 async function createUser(name, email, password) {
-    const emailExists = await checkEmailExist(email);
-    if (emailExists) {
-        throw new Error('Email is already Exist');
-    }
     const hashedPassword = await bcrypt.hash(password, 10);
     return new Promise((resolve, reject) => {
         const query = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';

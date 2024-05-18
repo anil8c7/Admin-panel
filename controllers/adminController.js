@@ -2,33 +2,47 @@ const express = require('express')
 const router = express.Router();
 const userModel = require('../model/userModel');
 const bcrypt = require('bcrypt');
-router.get('/signup', async (req, resp) => {
+const { v4: uuidv4 } = require('uuid');
+const Authentication = require('../services/auth');
 
-    resp.render('admin/signUp');
-})
+
+// router.get('/signup', async (req, resp) => {
+//     resp.render('admin/signUp');
+// })
 
 router.post('/signup', async (req, resp) => {
+    console.log(req.body);
     const { name, email, password } = req.body;
     const data = {
-        status: 400, // Default to an error status
-        message: '' // Initialize the message
+        status: 400,
+        message: '' 
     };
     try {
         if (name !== "" && email !== "" && password !== "") {
             let isEmailValid = await checkEmailValidation(email)
             if (isEmailValid) {
-                const newUser = await userModel.createUser(name, email, password);
-                const data = {
-                    status: 201, // Default to an error status
-                    message: 'User Created' // Initialize the message
-                };
-                resp.render('admin/signUp', data);
+                const newEmailExist = await userModel.checkEmailExist(email);
+                if(newEmailExist){
+                    const data = {
+                        status: 409, 
+                        message: 'User is already exist' 
+                    };
+                    return resp.status(409).json(data);
+                }else{
+                    const newUser = await userModel.createUser(name, email, password);
+                    const data = {
+                        status: 201, 
+                        message: 'User Created' 
+                    };
+                    return resp.status(201).json(data);
+                }
+               
             } else {
                 const data = {
                     status: 400,
                     message: "Email is not Valid"
                 }
-                resp.render('admin/signUp', data);
+                return resp.status(400).json(data);
             }
         }
         else {
@@ -36,7 +50,7 @@ router.post('/signup', async (req, resp) => {
                 status: 400,
                 message: "All fields are required"
             }
-            resp.render('admin/signUp', data);
+            return resp.status(400).json(data);
         }
     }
     catch (error) {
@@ -44,7 +58,7 @@ router.post('/signup', async (req, resp) => {
             status: 500,
             message: error.message // Initialize the message
         };
-        resp.render('admin/signUp', data);
+        return resp.status(500).json(data);
     }
 })
 
@@ -72,6 +86,9 @@ router.post('/signin', async (req, resp) => {
                     const dbpassword = user[0].password;
                     const passwordMatch = await bcrypt.compare(password, dbpassword);
                     if (passwordMatch) {
+                        let sesssionId = uuidv4();
+                        const author = new Authentication;
+                        console.log(sesssionId);
                         const data = {
                             status: 201,
                             message: "User Login Successfully"
